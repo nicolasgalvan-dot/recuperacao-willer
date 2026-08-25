@@ -48,13 +48,13 @@ Body:
 }
 GET /medicos
 
-Lista todos os médicos com suas especialidades vinculadas.
+Lista todos os médicos e suas especialidades vinculadas.
 
-Não necessita de body.
+Body: não possui.
 
 PUT /medicos
 
-Atualiza um médico.
+Atualiza os dados de um médico.
 
 Body:
 
@@ -63,13 +63,13 @@ Body:
   "nome": "Dr. Carlos Eduardo Silva",
   "crm": "54321-SP"
 }
-DELETE /medicos/
+DELETE /medicos/:id
 
 Remove um médico pelo ID.
 
-URL:
+Exemplo:
 
-http://localhost:3000/medicos/1
+GET http://localhost:3000/medicos/1
 Especialidades
 POST /especialidades
 
@@ -83,7 +83,7 @@ Body:
 }
 PUT /especialidades
 
-Atualiza uma especialidade.
+Atualiza os dados de uma especialidade.
 
 Body:
 
@@ -103,17 +103,17 @@ Body:
   "medicoId": 1,
   "especialidadeId": 2
 }
-GET /medicos//especialidades
+GET /medicos/:id/especialidades
 
 Lista as especialidades de um médico específico.
 
-URL:
+Exemplo:
 
-http://localhost:3000/medicos/1/especialidades
-DELETE /medicos//especialidades/
+GET http://localhost:3000/medicos/1/especialidades
+DELETE /medicos/:id/especialidades/:especialidadeId
 
-Desvincula uma especialidade de um médico.
+Remove o vínculo entre um médico e uma especialidade.
 
-URL:
+Exemplo:
 
-http://localhost:3000/medicos/1/especialidades/2
+DELETE http://localhost:3000/medicos/1/especialidades/2
