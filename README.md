@@ -34,29 +34,86 @@ npm start
 
 A API vai rodar em `http://localhost:3000`.
 
----
+Rotas
+Médicos
+POST /medicos
 
-## Rotas
+Cadastra um novo médico.
 
-### Médicos
+Body:
 
-- **GET /medicos** — Lista todos os médicos e especialidades vinculadas.
-- **POST /medicos** — Cadastra um novo médico.
-  - Body: `{"nome": "Dr. Carlos Eduardo", "crm": "54321-SP"}`
-- **PUT /medicos** — Atualiza um médico.
-  - Body: `{"id": 1, "nome": "Dr. Carlos Eduardo Silva", "crm": "54321-SP"}`
-- **DELETE /medicos/:id** — Remove um médico pelo ID.
+{
+  "nome": "Dr. Carlos Eduardo",
+  "crm": "54321-SP"
+}
+GET /medicos
 
-### Especialidades
+Lista todos os médicos com suas especialidades vinculadas.
 
-- **POST /especialidades** — Cadastra uma especialidade.
-  - Body: `{"nome": "Pediatria", "descricao": "Atendimento infantil"}`
-- **PUT /especialidades** — Atualiza uma especialidade.
-  - Body: `{"id": 1, "nome": "Pediatria Geral", "descricao": "Atendimento pediátrico geral"}`
+Não necessita de body.
 
-### Vínculos
+PUT /medicos
 
-- **POST /medicos/vincular** — Vincula uma especialidade a um médico.
-  - Body: `{"medicoId": 1, "especialidadeId": 2}`
-- **GET /medicos/:id/especialidades** — Lista as especialidades de um médico específico.
-- **DELETE /medicos/:id/especialidades/:especialidadeId** — Desvincula uma especialidade de um médico.
+Atualiza um médico.
+
+Body:
+
+{
+  "id": 1,
+  "nome": "Dr. Carlos Eduardo Silva",
+  "crm": "54321-SP"
+}
+DELETE /medicos/
+
+Remove um médico pelo ID.
+
+URL:
+
+http://localhost:3000/medicos/1
+Especialidades
+POST /especialidades
+
+Cadastra uma nova especialidade.
+
+Body:
+
+{
+  "nome": "Pediatria",
+  "descricao": "Atendimento infantil"
+}
+PUT /especialidades
+
+Atualiza uma especialidade.
+
+Body:
+
+{
+  "id": 1,
+  "nome": "Pediatria Geral",
+  "descricao": "Atendimento pediátrico geral"
+}
+Vínculos
+POST /medicos/vincular
+
+Vincula uma especialidade a um médico.
+
+Body:
+
+{
+  "medicoId": 1,
+  "especialidadeId": 2
+}
+GET /medicos//especialidades
+
+Lista as especialidades de um médico específico.
+
+URL:
+
+http://localhost:3000/medicos/1/especialidades
+DELETE /medicos//especialidades/
+
+Desvincula uma especialidade de um médico.
+
+URL:
+
+http://localhost:3000/medicos/1/especialidades/2
