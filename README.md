@@ -10,24 +10,34 @@ API REST para gerenciamento de médicos e especialidades.
 ## Como rodar o projeto
 
 1. Clone o repositório:
+```bash
 git clone <url-do-repositorio>
 cd recuperacao-willer
+```
 
-2. Instale as dependências:
-npm install
-
-3. Crie o banco no PostgreSQL:
+2. Crie o banco no PostgreSQL:
+```sql
 CREATE DATABASE mediconnect;
+```
 
-4. Crie um arquivo .env na raiz do projeto:
+3. Crie um arquivo `.env` na raiz do projeto:
+```env
 DATABASE_URL="postgresql://postgres:1234@localhost:5432/mediconnect"
-(Substitua postgres:1234 pelo usuário e senha do seu PostgreSQL)
+```
+*(Substitua `postgres:1234` pelo usuário e senha do seu PostgreSQL)*
+
+4. Instale as dependências:
+```bash
+npm install
+```
 
 5. Execute as migrations e inicie o servidor:
+```bash
 npx prisma migrate deploy
 npm start
+```
 
-A API vai rodar em http://localhost:3000
+A API vai rodar em `http://localhost:3000`.
 
 ---
 
@@ -35,18 +45,33 @@ A API vai rodar em http://localhost:3000
 
 ### Médicos
 
-- GET /medicos — Lista todos os médicos e suas especialidades.
-- POST /medicos — Cadastra um novo médico. Body: {"nome": "Carlos Eduardo", "crm": "54321-SP"}
-- PUT /medicos — Atualiza um médico. Body: {"id": 1, "nome": "Carlos Eduardo Silva", "crm": "54321-SP"}
-- DELETE /medicos/:id — Remove um médico pelo ID.
+- **GET `/medicos`** — Lista todos os médicos com suas especialidades.
+- **POST `/medicos`** — Cadastra um novo médico.
+  ```json
+  { "nome": "Dr. Carlos Eduardo", "crm": "54321-SP" }
+  ```
+- **PUT `/medicos`** — Atualiza os dados de um médico.
+  ```json
+  { "id": 1, "nome": "Dr. Carlos Eduardo Silva", "crm": "54321-SP" }
+  ```
+- **DELETE `/medicos/:id`** — Remove um médico pelo ID.
 
 ### Especialidades
 
-- POST /especialidades — Cadastra uma especialidade. Body: {"nome": "Pediatria", "descricao": "Atendimento infantil"}
-- PUT /especialidades — Atualiza uma especialidade. Body: {"id": 1, "nome": "Pediatria Geral", "descricao": "Atendimento de crianças e adolescentes"}
+- **POST `/especialidades`** — Cadastra uma nova especialidade.
+  ```json
+  { "nome": "Pediatria", "descricao": "Atendimento infantil" }
+  ```
+- **PUT `/especialidades`** — Atualiza os dados de uma especialidade.
+  ```json
+  { "id": 1, "nome": "Pediatria Geral", "descricao": "Atendimento pediátrico geral" }
+  ```
 
 ### Vínculos (Médico e Especialidade)
 
-- POST /medicos/vincular — Vincula uma especialidade a um médico. Body: {"medicoId": 1, "especialidadeId": 2}
-- GET /medicos/:id/especialidades — Retorna as especialidades de um médico específico.
-- DELETE /medicos/:id/especialidades/:especialidadeId — Desvincula uma especialidade do médico.
+- **POST `/medicos/vincular`** — Vincula uma especialidade a um médico.
+  ```json
+  { "medicoId": 1, "especialidadeId": 2 }
+  ```
+- **GET `/medicos/:id/especialidades`** — Lista as especialidades de um médico específico.
+- **DELETE `/medicos/:id/especialidades/:especialidadeId`** — Desvincula uma especialidade de um médico.
